@@ -53,7 +53,7 @@ public class BeanListenerConfig {
 
     @EventListener
     public void customRunnerReadyEvent(RunnerReadyEvent event) {
-        LOGGER.info("A runner send a RunnerReadyEvent with a message: {}", event.getMessage());
+        LOGGER.info("A runner sent a RunnerReadyEvent with a message: {}", event.getMessage());
     }
 
 }
