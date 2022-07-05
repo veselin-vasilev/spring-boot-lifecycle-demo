@@ -1,7 +1,9 @@
 package com.example.demo.api;
 
+import com.example.demo.bean.SecretBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -18,13 +20,14 @@ import javax.annotation.PreDestroy;
 @Slf4j
 public class SampleResource implements ApplicationContextAware {
 
-    @Value("${someProp}")
-    private String configValue;
+    @Autowired
+    private SecretBean secretBean;
 
-    @GetMapping("/parameterized-endpoint")
-    public String sampleEndpoint(@RequestParam("someParam") final String param) {
-        LOGGER.info("The param: {}", param);
-        return "You have passed me a parameter and I logged it! I was also configured to tell you this: " + configValue;
+    private String notAutowired;
+
+    @GetMapping("/secret")
+    public String sampleEndpoint() {
+        return "I was configured to tell you this: " + secretBean.getSecret();
     }
 
     @Override
@@ -36,6 +39,7 @@ public class SampleResource implements ApplicationContextAware {
     @PostConstruct
     public void postConstruct() {
         LOGGER.info("Hello there!");
+        notAutowired = "I was created in postConstruct!";
     }
 
     @PreDestroy

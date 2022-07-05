@@ -11,6 +11,6 @@ public class EnvironmentPreparedListener implements ApplicationListener<Applicat
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         LOGGER.info("The ApplicationEnvironmentPreparedEvent has been fired. The Environment for the context is known at this stage.");
-        LOGGER.info("We have successfully provided the custom property with value: {}", event.getEnvironment().getProperty("someProp"));
+        LOGGER.info("We have successfully provided the custom property with value: \"{}\"", event.getEnvironment().getProperty("someTruth"));
     }
 }

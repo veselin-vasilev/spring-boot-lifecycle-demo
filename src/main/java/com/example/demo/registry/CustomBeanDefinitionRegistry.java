@@ -1,9 +1,8 @@
 package com.example.demo.registry;
 
-import com.example.demo.bean.SimpleCustomBean;
+import com.example.demo.bean.SecretBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
@@ -17,9 +16,9 @@ public class CustomBeanDefinitionRegistry implements BeanDefinitionRegistryPostP
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         LOGGER.info("I can manipulate the registries!");
-        final var customBeanDefinition = new RootBeanDefinition(SimpleCustomBean.class);
-        registry.registerBeanDefinition("simpleCustomBean", customBeanDefinition);
-        LOGGER.info("I just registered a new Bean Definition for: {}", customBeanDefinition.getBeanClass().getSimpleName());
+        final var secretBeanDefinition = new RootBeanDefinition(SecretBean.class);
+        registry.registerBeanDefinition("secretBean", secretBeanDefinition);
+        LOGGER.info("I just registered a new Bean Definition for: {}", secretBeanDefinition.getBeanClass().getSimpleName());
     }
 
     @Override
