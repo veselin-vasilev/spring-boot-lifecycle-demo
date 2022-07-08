@@ -24,6 +24,7 @@ public class CustomBeanDefinitionRegistry implements BeanDefinitionRegistryPostP
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         final var sampleResourceDefinition = beanFactory.getBeanDefinition("sampleResource");
+        sampleResourceDefinition.setDependsOn("sampleApplicationRunner");
         LOGGER.info("I can manipulate the bean definitions! Here, this is the bean definition of my friend the SampleResource: {}.",
                 sampleResourceDefinition);
     }

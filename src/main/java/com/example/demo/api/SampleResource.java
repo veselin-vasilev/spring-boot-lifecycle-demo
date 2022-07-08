@@ -1,33 +1,25 @@
 package com.example.demo.api;
 
-import com.example.demo.bean.SecretBean;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 @RestController
 @RequestMapping("/v1/sample")
 @Slf4j
 public class SampleResource implements ApplicationContextAware {
 
-    @Autowired
-    private SecretBean secretBean;
-
-    private String notAutowired;
+    private String someTruth;
 
     @GetMapping("/secret")
     public String sampleEndpoint() {
-        return "I was configured to tell you this: " + secretBean.getSecret();
+        return "I was configured to tell you this: " + someTruth;
     }
 
     @Override
@@ -38,12 +30,16 @@ public class SampleResource implements ApplicationContextAware {
 
     @PostConstruct
     public void postConstruct() {
-        LOGGER.info("Hello there!");
-        notAutowired = "I was created in postConstruct!";
+        LOGGER.info("I can influence the way I was initialized - pineapple doesn't go on pizza!");
+        someTruth = "Pineapple is not allowed on pizza!";
     }
 
     @PreDestroy
     public void preDestroy() {
-        LOGGER.info("May the force be with you!");
+        LOGGER.info("Pineapple doesn't go on pizza is a hill I'll die on!");
+    }
+
+    public void setSomeTruth(String someTruth) {
+        this.someTruth = someTruth;
     }
 }

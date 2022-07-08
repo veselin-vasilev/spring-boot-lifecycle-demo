@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 @ToString
 public class SecretBean {
 
-    @Value("${someTruth}")
+    @Value("${secret}")
     private String secret;
 
     public String getSecret() {
