@@ -6,12 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Data
 @ToString
-public class SecretBean {
+public class JsonConfiguredBean {
 
-    @Value("${secret}")
-    private String secret;
-
-    public String getSecret() {
-        return secret;
-    }
+    @Value("${feedbackUrl}")
+    private String feedbackUrl;
 }
